@@ -95,7 +95,7 @@ export default function Home() {
                   Expert-led training programs in IT and non-IT fields, including advanced technologies like AI, ML, and blockchain.
                 </p>
                 <Button variant="link" asChild className="mt-4 p-0">
-                  <Link href="/services#training">Learn more →</Link>
+                  <Link href="/services/training">Learn more →</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -108,7 +108,7 @@ export default function Home() {
                   End-to-end placement support including profiling, matching, and successful onboarding with top companies.
                 </p>
                 <Button variant="link" asChild className="mt-4 p-0">
-                  <Link href="/services#placement">Learn more →</Link>
+                  <Link href="/services/placement">Learn more →</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -121,7 +121,7 @@ export default function Home() {
                   Strategic workforce planning and recruitment solutions for businesses of all sizes.
                 </p>
                 <Button variant="link" asChild className="mt-4 p-0">
-                  <Link href="/services#consultancy">Learn more →</Link>
+                  <Link href="/services/consultancy">Learn more →</Link>
                 </Button>
               </CardContent>
             </Card>
