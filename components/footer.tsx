@@ -2,8 +2,8 @@ import Link from "next/link"
 import { Building2 } from "lucide-react"
 
 export function Footer() {
-  return (
-    <footer className="w-full border-t bg-background">
+  return (//container mx-auto px-24 py-16 pt-24 min-h-screen
+    <footer className="container mx-auto px-24 pt-2 w-full border-t bg-background">
       <div className="container py-10">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="flex flex-col space-y-4">
@@ -15,7 +15,7 @@ export function Footer() {
               Work is Worship. Build Your Future with The Udyog.
             </p>
           </div>
-          <div>
+          <div className="px-20">
             <h3 className="mb-4 text-sm font-semibold">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -40,7 +40,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div>
+          <div className="px-20">
             <h3 className="mb-4 text-sm font-semibold">Services</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -60,7 +60,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-          <div>
+          <div className="px-20">
             <h3 className="mb-4 text-sm font-semibold">Contact</h3>
             <ul className="space-y-2 text-sm">
               <li className="text-muted-foreground">
