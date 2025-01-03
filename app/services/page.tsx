@@ -1,55 +1,12 @@
-import { Briefcase, Brain, MessageSquare, Users2 } from 'lucide-react'
-import Link from "next/link"
-import Image from 'next/image'
+import Image from "next/image"
+import { Briefcase, GraduationCap, Users } from "lucide-react"
+import { SectionHeader } from "@/components/section-header"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ServicesPage() {
-  const services = [
-    {
-      icon: <Briefcase className="h-6 w-6" />,
-      title: "Job Portal",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-      href: "/careers"
-    },
-    {
-      icon: <Brain className="h-6 w-6" />,
-      title: "Skill Training",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-      href: "/services/training"
-    },
-    {
-      icon: <MessageSquare className="h-6 w-6" />,
-      title: "Interview Test",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-      href: "/services/interview-test"
-    },
-    {
-      icon: <Users2 className="h-6 w-6" />,
-      title: "Job Conseling",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing.",
-      href: "/services/placement"
-    },
-  ]
-  const steps = [
-    {
-      number: "01",
-      title: "Apply for the Jobs",
-      description: "Integer pharetra lectus eget dui porttitor mattis. Etiam ut ante vestibulum nisl hendrerit gravida."
-    },
-    {
-      number: "02",
-      title: "Prepare for the Test & Interview",
-      description: "Integer pharetra lectus eget dui porttitor mattis. Etiam ut ante vestibulum nisl hendrerit gravida."
-    },
-    {
-      number: "03",
-      title: "Get Your Dream Job",
-      description: "Integer pharetra lectus eget dui porttitor mattis. Etiam ut ante vestibulum nisl hendrerit gravida."
-    }
-  ]
-
   return (
-    <main className="container mx-auto px-4 py-8 min-h-screen">
-      
+    <div className="min-h-screen">
+      {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
         <Image
           src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2940&auto=format&fit=crop"
@@ -67,77 +24,136 @@ export default function ServicesPage() {
         </div>
       </section>
 
-
-      {/* Services Section */}
-      <section className="mx-auto max-w-7xl px-4 py-20">
-        <div className="text-center">
-          <h2 className="mb-16 text-4xl font-bold md:text-5xl">
-            Right Connection and
-            <br />
-            Right Employee
-          </h2>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <Link 
-              key={index} 
-              href={service.href}
-              className="flex flex-col items-center rounded-lg border p-8 text-center transition-colors hover:border-white"
-            >
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full ">
-                {service.icon}
-              </div>
-              <h3 className="mb-4 text-xl font-semibold">{service.title}</h3>
-              <p className="text-sm">
-                {service.description}
-              </p>
-            </Link>
-          ))}
+      {/* Training Section */}
+      <section id="training" className="py-16">
+        <div className="container">
+          <SectionHeader
+            title="Training Programs"
+            description="Enhance your skills with our expert-led training programs"
+          />
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <GraduationCap className="h-8 w-8 mb-4" />
+                <CardTitle>Technical Training</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>Advanced Programming Languages</li>
+                  <li>Web Development</li>
+                  <li>Cloud Computing</li>
+                  <li>AI and Machine Learning</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <Users className="h-8 w-8 mb-4" />
+                <CardTitle>Soft Skills</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>Communication Skills</li>
+                  <li>Leadership Development</li>
+                  <li>Team Management</li>
+                  <li>Time Management</li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <Briefcase className="h-8 w-8 mb-4" />
+                <CardTitle>Career Preparation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>Resume Building</li>
+                  <li>Interview Preparation</li>
+                  <li>Personal Branding</li>
+                  <li>Career Guidance</li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
-      {/* How We Work Section */}
-      <section className="mx-auto max-w-7xl px-4 py-20">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Image Side */}
-          <div className="relative border border-zinc-800">
-            <Image
-              src="https://www.instructionalsolutions.com/hubfs/email-signature-on-mobile-device-1.webp"
-              alt="Professional using phone"
-              fill
-              className="rounded-lg"
-            />
-          </div>
-
-          {/* Content Side */}
-          <div className="flex flex-col justify-center">
-            <p className="mb-4 text-zinc-400">HOW WE WORK</p>
-            <h2 className="mb-6 text-4xl font-bold md:text-5xl">
-              Learn How to Achieve
-              <br />
-              Your Goal
-            </h2>
-            <p className="mb-8 text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat tempor turpis, quis egestas ligula efficitur et. Donec at diam at nisl consectetur.
-            </p>
-
-            <div className="space-y-8">
-              {steps.map((step, index) => (
-                <div key={index} className="flex gap-6">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center bg-zinc-800 text-white">
-                    {step.number}
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-xl font-semibold">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
-                  </div>
-                </div>
-              ))}
+      {/* Placement Section */}
+      <section id="placement" className="py-16 bg-muted/50">
+        <div className="container">
+          <SectionHeader
+            title="Placement Services"
+            description="End-to-end placement support for career success"
+          />
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">For Job Seekers</h3>
+              <ul className="space-y-4 text-muted-foreground">
+                <li>Profile Enhancement</li>
+                <li>Job Matching</li>
+                <li>Interview Scheduling</li>
+                <li>Offer Negotiation</li>
+                <li>Post-placement Support</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4">For Employers</h3>
+              <ul className="space-y-4 text-muted-foreground">
+                <li>Candidate Sourcing</li>
+                <li>Skill Assessment</li>
+                <li>Background Verification</li>
+                <li>Onboarding Support</li>
+                <li>Retention Strategies</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Consultancy Section */}
+      <section id="consultancy" className="py-16">
+        <div className="container">
+          <SectionHeader
+            title="Consultancy Services"
+            description="Strategic workforce planning and management solutions"
+          />
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>HR Strategy</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Develop effective HR strategies aligned with your business goals
+                  and organizational culture.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Talent Management</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Create and implement comprehensive talent management programs
+                  for sustainable growth.
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Process Optimization</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Streamline your HR processes and systems for maximum efficiency
+                  and effectiveness.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }

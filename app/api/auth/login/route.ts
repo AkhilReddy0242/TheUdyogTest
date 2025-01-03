@@ -9,7 +9,7 @@ const loginSchema = z.object({
   password: z.string(),
 });
 
-const JWT_SECRET = process.env.JWT_SECRET || 'sample';
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function POST(req: Request) {
   try {

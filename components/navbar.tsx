@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { ModeToggle } from "@/components/mode-toggle"
+import { UserNav } from "@/components/auth/user-nav"
 
 const routes = [
   { href: "/", label: "Home" },
@@ -23,20 +24,9 @@ const routes = [
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
 
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && !(event.target as Element).closest('[role="dialog"]')) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen])
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center">
         <Link href="/" className="flex items-center space-x-2">
           <Building2 className="h-6 w-6" />
           <span className="font-bold">The Udyog</span>
@@ -54,12 +44,7 @@ export function Navbar() {
             ))}
           </nav>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" asChild>
-              <Link href="/register">Register</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/login">Login</Link>
-            </Button>
+            <UserNav />
             <ModeToggle />
           </div>
         </div>
@@ -83,16 +68,7 @@ export function Navbar() {
                     {route.label}
                   </Link>
                 ))}
-                <Button asChild className="w-full">
-                  <Link href="/register" onClick={() => setIsOpen(false)}>
-                    Register
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                </Button>
+                <UserNav />
               </nav>
             </SheetContent>
           </Sheet>

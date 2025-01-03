@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -16,7 +17,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Loading } from '@/components/loading';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -26,6 +26,7 @@ const loginSchema = z.object({
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
+  const { user, setAuth } = useAuth()
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -39,7 +40,7 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
@@ -50,7 +51,7 @@ export default function LoginPage() {
       if (!response.ok) {
         throw new Error(data.error || 'Login failed');
       }
-
+      setAuth(data.user, data.token)
       // Store the token in localStorage
       localStorage.setItem('token', data.token);
 
@@ -58,8 +59,8 @@ export default function LoginPage() {
         title: 'Welcome back!',
         description: 'You have successfully logged in.',
       });
-
-      router.push('/services');
+      
+      router.push('/dashboard');
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -79,7 +80,7 @@ export default function LoginPage() {
           Log in to access your account
         </p>
       </div>
-      {isLoading && <Loading />}
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -115,7 +116,7 @@ export default function LoginPage() {
           </Button>
         </form>
       </Form>
-      {isLoading && <Loading />}
     </div>
   );
 }
+

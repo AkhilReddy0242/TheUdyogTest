@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import { SectionHeader } from "@/components/section-header"
 import { Button } from "@/components/ui/button"
@@ -9,6 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ParallaxHeader } from "@/components/parallax-header"
+import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
 
 const jobs = [
   {
@@ -48,23 +52,12 @@ const jobs = [
 export default function CareersPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop"
-          alt="Career opportunities"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Career Opportunities</h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            Find your next career move with The Udyog
-          </p>
-        </div>
-      </section>
+      <ParallaxHeader
+        title="Career Opportunities"
+        description="Find your next career move with The Udyog"
+        imageUrl="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop"
+        imageAlt="Career opportunities"
+      />
 
       {/* Job Search Section */}
       <section className="py-16">
@@ -105,37 +98,41 @@ export default function CareersPage() {
             </Select>
           </div>
 
-          <div className="grid gap-6">
-            {jobs.map((job, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{job.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-2">
-                    <p className="text-muted-foreground">
-                      <strong>Company:</strong> {job.company}
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong>Location:</strong> {job.location}
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong>Type:</strong> {job.type}
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong>Experience:</strong> {job.experience}
-                    </p>
-                    <p className="text-muted-foreground">
-                      <strong>Salary:</strong> {job.salary}
-                    </p>
-                  </div>
-                </CardContent>
-                <CardFooter>
-                  <Button>Apply Now</Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+          <StaggerChildren>
+            <div className="grid gap-6">
+              {jobs.map((job, index) => (
+                <StaggerItem key={index}>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{job.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid gap-2">
+                        <p className="text-muted-foreground">
+                          <strong>Company:</strong> {job.company}
+                        </p>
+                        <p className="text-muted-foreground">
+                          <strong>Location:</strong> {job.location}
+                        </p>
+                        <p className="text-muted-foreground">
+                          <strong>Type:</strong> {job.type}
+                        </p>
+                        <p className="text-muted-foreground">
+                          <strong>Experience:</strong> {job.experience}
+                        </p>
+                        <p className="text-muted-foreground">
+                          <strong>Salary:</strong> {job.salary}
+                        </p>
+                      </div>
+                    </CardContent>
+                    <CardFooter>
+                      <Button>Apply Now</Button>
+                    </CardFooter>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </div>
+          </StaggerChildren>
         </div>
       </section>
 
