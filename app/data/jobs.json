@@ -1,0 +1,48 @@
+{
+    "jobs": [
+      {
+        "id": "1",
+        "title": "Senior Software Engineer",
+        "company": "Tech Innovators Ltd",
+        "location": "Mumbai, India",
+        "type": "Full-time",
+        "experience": "5+ years",
+        "salary": "₹18-25 LPA",
+        "skills": ["React", "Node.js", "TypeScript", "AWS"],
+        "description": "Looking for an experienced software engineer to lead our development team."
+      },
+      {
+        "id": "2",
+        "title": "Product Manager",
+        "company": "Digital Solutions Inc",
+        "location": "Bangalore, India",
+        "type": "Full-time",
+        "experience": "4+ years",
+        "salary": "₹20-30 LPA",
+        "skills": ["Product Strategy", "Agile", "Data Analysis"],
+        "description": "Join our product team to drive innovation and growth."
+      },
+      {
+        "id": "3",
+        "title": "UX Designer",
+        "company": "Creative Tech",
+        "location": "Delhi, India",
+        "type": "Full-time",
+        "experience": "3+ years",
+        "salary": "₹12-18 LPA",
+        "skills": ["Figma", "UI Design", "User Research"],
+        "description": "Create beautiful and intuitive user experiences for our products."
+      },
+      {
+        "id": "4",
+        "title": "Data Scientist",
+        "company": "Analytics Pro",
+        "location": "Hyderabad, India",
+        "type": "Full-time",
+        "experience": "2+ years",
+        "salary": "₹15-22 LPA",
+        "skills": ["Python", "Machine Learning", "SQL"],
+        "description": "Work on cutting-edge data science projects and ML models."
+      }
+    ]
+  }
