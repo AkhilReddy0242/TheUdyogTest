@@ -2,10 +2,9 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { useAuth } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -18,59 +17,58 @@ import {
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
 
-const profileSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
+const adminLoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1, "Password is required"),
 })
 
-export default function ProfilePage() {
+export default function AdminLoginPage() {
   const router = useRouter()
-  const { user, setAuth } = useAuth()
-  const token = useAuth().token
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof profileSchema>>({
-    resolver: zodResolver(profileSchema),
+  const form = useForm<z.infer<typeof adminLoginSchema>>({
+    resolver: zodResolver(adminLoginSchema),
     defaultValues: {
-      name: user?.name || "",
-      email: user?.email || "",
+      email: "",
+      password: "",
     },
   })
 
-  if (!user) {
-    router.push("/login")
-    return null
-  }
-
-  async function onSubmit(values: z.infer<typeof profileSchema>) {
+  async function onSubmit(values: z.infer<typeof adminLoginSchema>) {
     try {
       setIsLoading(true)
-      // Update user profile API call would go here
-      if (!user) return;
-      
-      setAuth({
-        id: user.id,
-        role: user.role,
-        ...values
-      }, token ?? '')
-      
-      toast({
-        title: "Profile updated",
-        description: "Your profile has been updated successfully.",
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
       })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed")
+      }
+
+      localStorage.setItem("adminToken", data.token)
+      router.push("/admin/dashboard")
     } catch (error) {
-      // ... error handling
-      console.log(error)
+      toast({
+        variant: "destructive",
+        title: "Login failed",
+        description: error instanceof Error ? error.message : "Please try again",
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <div className="container max-w-md py-16">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold">Profile Settings</h1>
+        <h1 className="text-3xl font-bold">Admin Login</h1>
         <p className="text-muted-foreground mt-2">
-          Update your personal information
+          Access the admin dashboard
         </p>
       </div>
 
@@ -78,12 +76,12 @@ export default function ProfilePage() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name="name"
+            name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full Name</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input placeholder="admin@example.com" type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,12 +90,12 @@ export default function ProfilePage() {
 
           <FormField
             control={form.control}
-            name="email"
+            name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input {...field} type="email" />
+                  <Input placeholder="••••••••" type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,7 +103,7 @@ export default function ProfilePage() {
           />
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save Changes"}
+            {isLoading ? "Logging in..." : "Log In"}
           </Button>
         </form>
       </Form>

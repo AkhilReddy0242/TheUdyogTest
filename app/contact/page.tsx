@@ -26,7 +26,7 @@ export default function ContactPage() {
           priority
         />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10">
+        <div className="container relative z-10 pl-8">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Contact Us</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
             Get in touch with our team for any inquiries or partnership opportunities
@@ -96,9 +96,8 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Address</p>
                       <p className="text-sm text-muted-foreground">
-                        123 Business District<br />
-                        Mumbai, Maharashtra<br />
-                        India
+                      2nd floor, H.NO 6-39/114 ,<br/> West
+                      Venkatapuram, Secunderabad.
                       </p>
                     </div>
                   </div>
@@ -107,7 +106,8 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Phone</p>
                       <p className="text-sm text-muted-foreground">
-                        +91 123 456 7890
+                      +91 9059384960 <br/> 
+                      +91 9985681819
                       </p>
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Email</p>
                       <p className="text-sm text-muted-foreground">
-                        info@theudyog.com
+                      services.theudyog@gmail.com
                       </p>
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Business Hours</p>
                       <p className="text-sm text-muted-foreground">
-                        Monday - Friday<br />
+                        Monday - sunday<br />
                         9:00 AM - 6:00 PM
                       </p>
                     </div>

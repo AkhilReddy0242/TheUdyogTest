@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth"
+import { useRouter } from "next/navigation"
 import { DashboardHeader } from "@/components/dashboard/header"
 import { DashboardMetrics } from "@/components/dashboard/metrics"
 import { RecentApplications } from "@/components/dashboard/recent-applications"
@@ -13,14 +12,9 @@ export default function DashboardPage() {
   const router = useRouter()
   const { user } = useAuth()
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/login')
-    }
-  }, [user, router])
-
   if (!user) {
-    return null // or a loading spinner
+    router.push("/login")
+    return null
   }
 
   return (

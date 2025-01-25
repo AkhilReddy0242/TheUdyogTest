@@ -20,7 +20,7 @@ export default function Home() {
           priority
         />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10 mx-auto px-4">
+        <div className="container relative z-10 mx-auto px-4 pl-8">
           <div className="max-w-3xl">
             <SlideIn direction="up">
               <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">

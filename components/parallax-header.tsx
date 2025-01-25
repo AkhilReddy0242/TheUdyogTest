@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import gsap from "gsap"
-import ScrollTrigger from "gsap/ScrollTrigger"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 interface ParallaxHeaderProps {
   title: string
@@ -54,7 +54,7 @@ export function ParallaxHeader({
   }, [])
 
   return (
-    <section ref={headerRef} className="relative h-[400px] flex items-center justify-center overflow-hidden">
+    <section ref={headerRef} className="relative h-[400px] flex items-center justify-center overflow-hidden pl-8">
       <div ref={imageRef} className="absolute inset-0">
         <Image
           src={imageUrl}

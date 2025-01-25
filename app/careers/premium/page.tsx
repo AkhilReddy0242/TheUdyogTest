@@ -6,20 +6,20 @@ import { ParallaxHeader } from "@/components/careers/parallax-header"
 import { JobSearch } from "@/components/careers/job-search"
 import { JobList } from "@/components/careers/job-list"
 import { useToast } from "@/hooks/use-toast"
-import { Job, JobSearchParams, searchJobs } from "@/lib/jobs"
+import { JobSearchParams, searchJobs, Job } from "@/lib/jobs"
 
 export default function PremiumCareersPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const empty: Job[] = []
-  const [jobs, setJobs] = useState(empty)
+  const temp: Job[] = []
+  const [jobs, setJobs] = useState(temp)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSearch = async (params: JobSearchParams) => {
     try {
       setIsLoading(true)
-      const results:Job[] = await searchJobs(params)
-      setJobs(results) // Type assertion to fix type error
+      const results: Job[] = await searchJobs(params)
+      setJobs(results)
     } catch (error) {
       toast({
         variant: "destructive",

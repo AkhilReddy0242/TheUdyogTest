@@ -18,7 +18,7 @@ export default function AboutPage() {
       />
 
       {/* Mission & Vision */}
-      <section className="py-16">
+      <section className="py-16 pl-8">
         <div className="container">
           <div className="grid gap-12 md:grid-cols-2">
             <StaggerChildren>
@@ -99,25 +99,9 @@ export default function AboutPage() {
               <div className="space-y-8">
                 <StaggerItem>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">2020</h3>
-                    <p className="text-muted-foreground">Founded with a vision to transform the employment landscape.</p>
-                  </div>
-                </StaggerItem>
-                <StaggerItem>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">2021</h3>
-                    <p className="text-muted-foreground">Expanded our services to include comprehensive training programs.</p>
-                  </div>
-                </StaggerItem>
-                <StaggerItem>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">2022</h3>
-                    <p className="text-muted-foreground">Launched innovative placement solutions for enterprises.</p>
-                  </div>
-                </StaggerItem>
-                <StaggerItem>
-                  <div>
                     <h3 className="text-xl font-semibold mb-2">2023</h3>
+                    <p className="text-muted-foreground">Founded with a vision to transform the employment landscape.</p>
+                    <p className="text-muted-foreground">Expanded our services to include comprehensive training programs.</p>
                     <p className="text-muted-foreground">Achieved milestone of 1000+ successful placements.</p>
                   </div>
                 </StaggerItem>

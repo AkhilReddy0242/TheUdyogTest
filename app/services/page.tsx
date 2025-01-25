@@ -16,7 +16,7 @@ export default function ServicesPage() {
           priority
         />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10">
+        <div className="container relative z-10 pl-8">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Our Services</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
             Comprehensive solutions for career development and workforce management
@@ -25,7 +25,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Training Section */}
-      <section id="training" className="py-16">
+      <section id="training" className="py-16 pl-8 pr-6">
         <div className="container">
           <SectionHeader
             title="Training Programs"
@@ -79,7 +79,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Placement Section */}
-      <section id="placement" className="py-16 bg-muted/50">
+      <section id="placement" className="py-16 bg-muted/50 pl-8 pr-6">
         <div className="container">
           <SectionHeader
             title="Placement Services"
@@ -111,7 +111,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Consultancy Section */}
-      <section id="consultancy" className="py-16">
+      <section id="consultancy" className="py-16 pl-6 pr-6">
         <div className="container">
           <SectionHeader
             title="Consultancy Services"

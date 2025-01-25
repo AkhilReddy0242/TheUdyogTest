@@ -59,7 +59,7 @@ export default function LoginPage() {
         title: 'Welcome back!',
         description: 'You have successfully logged in.',
       });
-      
+
       router.push('/dashboard');
     } catch (error) {
       toast({
@@ -119,4 +119,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
