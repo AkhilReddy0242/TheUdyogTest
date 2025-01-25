@@ -3,15 +3,19 @@
 import * as React from "react"
 import Link from "next/link"
 // import { Building2, Menu } from "lucide-react"
-// import { Button } from "@/components/ui/button"
-// import {
-//   Sheet,
-//   SheetContent,
-//   SheetTrigger,
-// } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { ModeToggle } from "@/components/mode-toggle"
 // import { UserNav } from "@/components/auth/user-nav"
 import logo from './LOGO.png'
+import { Menu } from "lucide-react"
+import { VisuallyHidden } from "@/components/ui/visually-hidden"
 
 const routes = [
   { href: "/", label: "Home" },
@@ -49,15 +53,19 @@ export function Navbar() {
             <ModeToggle />
           </div>
         </div>
-        {/* <div className="flex flex-1 items-center justify-end md:hidden">
+        <div className="flex flex-1 items-center justify-end md:hidden">
           <ModeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="ml-2">
                 <Menu className="h-5 w-5" />
+                <VisuallyHidden>Open menu</VisuallyHidden>
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>The Udyog</SheetTitle>
+              </SheetHeader>
               <nav className="flex flex-col space-y-4">
                 {routes.map((route) => (
                   <Link
@@ -69,11 +77,11 @@ export function Navbar() {
                     {route.label}
                   </Link>
                 ))}
-                <UserNav />
+                {/* <UserNav /> */}
               </nav>
             </SheetContent>
           </Sheet>
-        </div> */}
+        </div>
       </div>
     </header>
   )
