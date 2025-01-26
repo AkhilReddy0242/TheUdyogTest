@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { ParallaxHeader } from "@/components/parallax-header"
 import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
 import jobsData from "../data/jobs.json"
+import testJobsData from "../data/testjob.json"
 
 interface Job {
   id: string
@@ -29,28 +30,50 @@ interface Job {
   description: string
 }
 
+interface JobsForSearch {
+  Job_ID: string,
+  Job_Title: string,
+  Company_Name: string,
+  Location: string,
+  Salary: string,
+  Skills_Required: string,
+  Job_Description: string,
+  URL: string,
+  Job_Posted_On: string
+}
+
 export default function CareersPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [location, setLocation] = useState("")
   const [jobType, setJobType] = useState("")
   const [experience, setExperience] = useState("")
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>(jobsData.jobs)
+  const [filteredJobs, setFilteredJobs] = useState<JobsForSearch[]>(testJobsData.jobs)
+  const [expandedJobs, setExpandedJobs] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
-    const filtered = jobsData.jobs.filter(job => {
-      const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.description.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = testJobsData.jobs.filter(job => {
+      const matchesSearch = job.Job_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.Company_Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.Skills_Required.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.Job_Description.toLowerCase().includes(searchTerm.toLowerCase())
       
-      const matchesLocation = !location || job.location.toLowerCase().includes(location.toLowerCase())
-      const matchesType = !jobType || job.type === jobType
-      const matchesExperience = !experience || job.experience.includes(experience)
+      const matchesLocation = !location || job.Location.toLowerCase().includes(location.toLowerCase())
+      // const matchesType = !jobType || job.type === jobType
+      // const matchesExperience = !experience || job.experience.includes(experience)
 
-      return matchesSearch && matchesLocation && matchesType && matchesExperience
+      // return matchesSearch && matchesLocation && matchesType && matchesExperience
+      return matchesSearch && matchesLocation
     })
 
     setFilteredJobs(filtered)
   }, [searchTerm, location, jobType, experience])
+
+  const toggleDescription = (jobId: string) => {
+    setExpandedJobs(prev => ({
+      ...prev,
+      [jobId]: !prev[jobId]
+    }));
+  };
 
   return (
     <div className="min-h-screen">
@@ -127,38 +150,47 @@ export default function CareersPage() {
                 </Card>
               ) : (
                 filteredJobs.map((job) => (
-                  <StaggerItem key={job.id}>
+                  <StaggerItem key={job.Job_ID}>
                     <Card>
                       <CardHeader>
-                        <CardTitle>{job.title}</CardTitle>
+                        <CardTitle>{job.Job_Title}</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="grid gap-2">
                           <p className="text-muted-foreground">
-                            <strong>Company:</strong> {job.company}
+                            <strong>Company:</strong> {job.Company_Name}
                           </p>
                           <p className="text-muted-foreground">
-                            <strong>Location:</strong> {job.location}
+                            <strong>Location:</strong> {job.Location}
                           </p>
-                          <p className="text-muted-foreground">
+                          {/* <p className="text-muted-foreground">
                             <strong>Type:</strong> {job.type}
                           </p>
                           <p className="text-muted-foreground">
                             <strong>Experience:</strong> {job.experience}
+                          </p> */}
+                          <p className="text-muted-foreground">
+                            <strong>Salary:</strong> {job.Salary}
                           </p>
                           <p className="text-muted-foreground">
-                            <strong>Salary:</strong> {job.salary}
+                            <strong>Skills:</strong> {job.Skills_Required}
                           </p>
                           <p className="text-muted-foreground">
-                            <strong>Skills:</strong> {job.skills.join(", ")}
-                          </p>
-                          <p className="text-muted-foreground">
-                            {job.description}
+                            {expandedJobs[job.Job_ID] 
+                              ? job.Job_Description 
+                              : job.Job_Description.slice(0, 200) + "..."}
+                            <Button 
+                              variant="link" 
+                              className="p-0 h-auto font-semibold" 
+                              onClick={() => toggleDescription(job.Job_ID)}
+                            >
+                              {expandedJobs[job.Job_ID] ? "Show Less" : "Show More"}
+                            </Button>
                           </p>
                         </div>
                       </CardContent>
                       <CardFooter>
-                        <Button>Apply Now</Button>
+                        <Button onClick={() => window.open(job.URL, '_blank')}>Apply Now</Button>
                       </CardFooter>
                     </Card>
                   </StaggerItem>

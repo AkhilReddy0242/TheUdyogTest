@@ -18,26 +18,43 @@ export default function AboutPage() {
       />
 
       {/* Mission & Vision */}
-      <section className="py-16 pl-8">
-        <div className="container">
-          <div className="grid gap-12 md:grid-cols-2">
+      <section className="py-16 pl-8 pr-8">
+        <div className="container text-center">
+          <div className="grid gap-12">
             <StaggerChildren>
               <StaggerItem>
                 <div>
                   <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-                  <p className="text-muted-foreground">
-                    To eradicate unemployment by connecting individuals with meaningful career opportunities
-                    through comprehensive training, strategic placement, and expert consultancy services.
+                  <p className="text-muted-foreground pl-12 pr-12">
+                  At The Udyog, we believe that work is more than a necessity - it is a form of worship and a stepping stone to a brighter future. Founded with the mission to tackle one of India’s most
+pressing challenges - unemployment - we are dedicated to creating opportunities for job seekers
+and empowering individuals to build meaningful careers. <br/>
+Our approach is simple yet impactful: we connect the right talent with the right opportunities.
+From entry-level roles to executive leadership positions, our goal is to bridge the gap between
+job seekers and employers. By fostering strong relationships with individuals, companies, and HR
+departments, we ensure a seamless recruitment process that benefits all parties involved.
                   </p>
                 </div>
               </StaggerItem>
               <StaggerItem>
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
-                  <p className="text-muted-foreground">
-                    To be the catalyst in creating a future where every job seeker finds their true calling
-                    and every organization builds their dream team.
+                  <h2 className="text-2xl font-bold mb-4 pt-8">Our Vision</h2>
+                  <p className="text-muted-foreground pl-12 pr-12">
+                  At The Udyog, we aspire to eliminate unemployment across India by
+providing individuals with meaningful career opportunities that match
+their talents and ambitions. Our goal is to help people unlock their true
+potential through employment that fosters both personal and
+professional growth. By focusing on empowering individuals, we aim to
+create a future where work is not just a means of livelihood, but a
+pathway to purpose and lasting success, contributing to the overall
+development of society and the economy.
+
                   </p>
+                </div>
+              </StaggerItem>
+              <StaggerItem>
+                <div className="text-2xl font-bold mb-4 pt-8">
+                  <b> ‘Work is Worship’</b>
                 </div>
               </StaggerItem>
             </StaggerChildren>
@@ -46,7 +63,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core Values */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-16 bg-muted/50 p-6">
         <div className="container">
           <SectionHeader
             title="Our Core Values"
@@ -99,10 +116,10 @@ export default function AboutPage() {
               <div className="space-y-8">
                 <StaggerItem>
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">2023</h3>
+                    <h3 className="text-xl font-semibold mb-2">2024</h3>
                     <p className="text-muted-foreground">Founded with a vision to transform the employment landscape.</p>
                     <p className="text-muted-foreground">Expanded our services to include comprehensive training programs.</p>
-                    <p className="text-muted-foreground">Achieved milestone of 1000+ successful placements.</p>
+                    <p className="text-muted-foreground">Achieved milestone of 50+ successful placements.</p>
                   </div>
                 </StaggerItem>
               </div>

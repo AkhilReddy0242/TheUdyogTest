@@ -131,7 +131,7 @@ export default function Home() {
                       End-to-end placement support including profiling, matching, and successful onboarding with top companies.
                     </p>
                     <Button variant="link" asChild className="mt-4 p-0">
-                      <Link href="/services#placement">Learn more →</Link>
+                      <Link href="/services/placement">Learn more →</Link>
                     </Button>
                   </CardContent>
                 </Card>

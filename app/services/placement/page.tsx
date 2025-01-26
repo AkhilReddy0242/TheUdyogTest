@@ -7,65 +7,66 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import  { Button }  from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Users, Briefcase, TrendingUp, FileQuestion, BookOpen, Mail, Video, Sun, Moon, FileCheck, GraduationCap, Handshake, MessageCircle, Send, MessageSquare, Code } from 'lucide-react'
+import { Users, Briefcase, TrendingUp, FileQuestion, BookOpen, Mail, Video, Sun, Moon, FileCheck, GraduationCap, Handshake, MessageCircle, Send, MessageSquare, Code, Laptop2Icon } from 'lucide-react'
+import { useRouter } from "next/navigation"
+
 
 const placementProcess = [
   { 
     title: "Profile Creation", 
     description: "We create a comprehensive profile highlighting your skills and career goals.",
-    icon: FileCheck,
-    color: "bg-zinc-800"
+    icon: FileCheck
   },
   { 
     title: "Job Matching", 
     description: "Our AI-powered system matches your profile with suitable job openings.",
     icon: Users,
-    color: "bg-zinc-800"
+    color: ""
   },
   { 
     title: "Interview Preparation", 
     description: "We provide thorough interview coaching and mock interview sessions.",
     icon: Briefcase,
-    color: "bg-zinc-800"
+    color: ""
   },
   { 
     title: "Placement Support", 
     description: "Our team assists you throughout the hiring process, from application to offer negotiation.",
     icon: GraduationCap,
-    color: "bg-zinc-800"
+    color: ""
   },
   { 
     title: "Post-Placement Guidance", 
     description: "We offer continued support to ensure a smooth transition into your new role.",
     icon: Handshake,
-    color: "bg-zinc-800"
+    color: ""
   }
 ]
 
 const placementServices = [
   {
-    title: "Prime Preparation",
-    description: "200+ Courses for Complete Placement Preparation",
+    title: "Interview Guidance",
+    description: "",
+    icon: Laptop2Icon,
+    details: "Offer interview guidance and assistance to help you successfully navigate and excel in interviews.. Professional feedback and guidance are provided after every interview to help you improve and refine your approach for future opportunities."
+  },
+  {
+    title: "Interview Questionnaire",
+    description: "",
     icon: BookOpen,
-    details: "Access comprehensive placement preparation courses, including technical skills, aptitude, and soft skills training."
+    details: "Prepare a comprehensive list of potential interview questions specific to the job role. Include questions on technical, behavioral, and situational topics"
   },
   {
-    title: "Top 100 Programs",
-    description: "Daily coding practice with 450,000+ students",
-    icon: FileCheck,
-    details: "Practice top 100 coding questions, DSA problems, and interview puzzles that are frequently asked in interviews."
-  },
-  {
-    title: "Company Cheatsheets",
+    title: "Exams/Assessments Support",
     description: "Detailed preparation guides for top companies",
     icon: FileQuestion,
-    details: "Access comprehensive cheatsheets for companies like Accenture, Cognizant, and Capgemini, including FAQs and exam patterns."
+    details: "Guidance for clearing technical, non-technical and aptitude tests. Provide resources like sample tests and study materials for practice."
   },
   {
-    title: "Interview Preparation",
+    title: "Mock Interviews",
     description: "Company-specific interview preparation",
     icon: Video,
-    details: "Get detailed guidance on how to prepare for specific companies like TCS NQT, Cognizant Gen C, and Capgemini."
+    details: "Engage in comprehensive practice sessions designed to replicate real-life interview scenarios. These simulations help you build confidence, refine your responses, and develop effective communication and problem-solving skills, ensuring you are well-prepared for actual interviews"
   }
 ]
 
@@ -87,12 +88,32 @@ const successStories = [
     role: "Data Scientist",
     company: "AI Innovations Ltd.",
     quote: "The mock interviews and technical assessment support provided by The Udyog were crucial in helping me secure a position at a top AI research firm. I'm grateful for their expert guidance."
+  },
+  {
+    name: "Anita K.",
+    role: "Data Scientist",
+    company: "AI Innovations Ltd.",
+    quote: "The mock interviews and technical assessment support provided by The Udyog were crucial in helping me secure a position at a top AI research firm. I'm grateful for their expert guidance."
+  },
+  {
+    name: "Anita K.",
+    role: "Data Scientist",
+    company: "AI Innovations Ltd.",
+    quote: "The mock interviews and technical assessment support provided by The Udyog were crucial in helping me secure a position at a top AI research firm. I'm grateful for their expert guidance."
+  },
+  {
+    name: "Anita K.",
+    role: "Data Scientist",
+    company: "AI Innovations Ltd.",
+    quote: "The mock interviews and technical assessment support provided by The Udyog were crucial in helping me secure a position at a top AI research firm. I'm grateful for their expert guidance."
   }
 ]
 
 export default function PlacementContent() {
+  const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [activeStep, setActiveStep] = useState<number | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
@@ -102,6 +123,21 @@ export default function PlacementContent() {
   if (!mounted) {
     return null
   }
+
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(successStories.length / itemsPerPage);
+
+  const handleNext = () => {
+    if (currentIndex < totalPages - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <main className="min-h-screen dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -121,7 +157,7 @@ export default function PlacementContent() {
             <p className="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
               Unlock your potential with our expert placement services. We connect talent with opportunity.
             </p>
-            <Button size="lg" className="bg-zinc-800 hover:bg-zinc-700">
+            <Button size="lg" className="hover:bg-zinc-700">
               Get Started
             </Button>
           </motion.div>
@@ -146,7 +182,7 @@ export default function PlacementContent() {
                 onMouseLeave={() => setActiveStep(null)}
               >
                 <Card className={`relative ${activeStep === index ? 'scale-105' : ''} transition-all duration-300 bg-white/80 dark:bg-black backdrop-blur-sm border border-zinc-600 shadow-lg`}>
-                  <div className={`absolute top-4 ${index % 2 === 0 ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'} w-8 h-8 rounded-full ${step.color} flex items-center justify-center text-white`}>
+                  <div className={`absolute top-4 ${index % 2 === 0 ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'} w-8 h-8 rounded-full ${step.color} flex items-center justify-center`}>
                     <step.icon size={20} />
                   </div>
                   <CardHeader>
@@ -186,7 +222,7 @@ export default function PlacementContent() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Card className="bg-black/50 dark:bg-zinc-900/50 rounded-lg border border-zinc-900 backdrop-blur-lg shadow-lg">
+                    <Card className=" rounded-lg border border-zinc-900 backdrop-blur-lg shadow-lg">
                       <CardHeader>
                         <CardTitle>{service.title}</CardTitle>
                         <CardDescription>{service.description}</CardDescription>
@@ -204,7 +240,7 @@ export default function PlacementContent() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 md:py-24 text-white">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl md:text-4xl font-bold mb-12 text-center">Why Choose Our Placement Services?</h3>
           <div className="grid md:grid-cols-3 gap-8">
@@ -249,8 +285,24 @@ export default function PlacementContent() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl md:text-4xl font-bold mb-12 text-center">Success Stories</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {successStories.map((story, index) => (
+          <div className="flex justify-between mb-4">
+            <Button
+              variant="link"
+              onClick={handlePrevious}
+              disabled={currentIndex === 0}
+            >
+              &larr; Previous
+            </Button>
+            <Button
+              variant="link"
+              onClick={handleNext}
+              disabled={currentIndex === totalPages - 1}
+            >
+              Next &rarr;
+            </Button>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8 overflow-x-auto">
+            {successStories.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage).map((story, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -275,7 +327,7 @@ export default function PlacementContent() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 md:py-24 bg-black">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,7 +339,7 @@ export default function PlacementContent() {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Let us help you find the perfect job opportunity and guide you towards a successful career.
             </p>
-            <Button size="lg" className="bg-zinc-800 hover:bg-zinc-700 text-white">
+            <Button size="lg" className="bg-zinc-800 hover:bg-zinc-700"  onClick={() => router.push("/contact")}>
               Contact Us Today
             </Button>
           </motion.div>

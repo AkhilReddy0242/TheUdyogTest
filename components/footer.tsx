@@ -40,6 +40,11 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/terms" className="text-muted-foreground hover:text-foreground">
+                  Terms and Conditions
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -51,7 +56,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services#placement" className="text-muted-foreground hover:text-foreground">
+                <Link href="/services/placement" className="text-muted-foreground hover:text-foreground">
                   Placement
                 </Link>
               </li>
