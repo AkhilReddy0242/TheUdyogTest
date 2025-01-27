@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { toast } from "@/components/ui/toast"
 
 export interface ContactForm {
   name: string;
@@ -46,8 +47,10 @@ export default function ContactPage() {
         mode: 'cors'
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit');
+        throw new Error(result.details || 'Failed to submit');
       }
 
       // Reset form
@@ -59,10 +62,18 @@ export default function ContactPage() {
         phone: ''
       });
 
-      return { success: true, message: 'Successfully submitted!' };
-    } catch (error) {
-      console.error(error);
-      return { success: false, message: 'Failed to submit. Please try again.' };
+      toast({
+        title: "Success!",
+        description: "Your message has been sent successfully.",
+      });
+
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Error",
+        description: error.message || 'Failed to submit. Please try again.',
+        variant: "destructive",
+      });
     }
   };
 
