@@ -1,7 +1,23 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
+export async function OPTIONS(request: Request) {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400',
+    },
+  });
+}
 export async function POST(request: Request) {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  };
   try {
     const data = await request.json();
     console.log( process.env.GOOGLE_CLIENT_EMAIL)
@@ -32,12 +48,15 @@ export async function POST(request: Request) {
       }
     });
 
-    return NextResponse.json({ success: true, data: response.data });
+    return NextResponse.json(
+      { success: true, data: response.data },
+      { headers }
+    );
   } catch (error) {
     console.error('API Error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update sheet' },
-      { status: 500 }
+      { status: 500, headers }
     );
   }
 }

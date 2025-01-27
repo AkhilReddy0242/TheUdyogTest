@@ -44,6 +44,7 @@ export default function ContactPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
+        mode: 'cors',
       });
 
       if (!response.ok) {
@@ -60,6 +61,7 @@ export default function ContactPage() {
 
       return { success: true, message: 'Successfully submitted!' };
     } catch (error) {
+      console.log(error)
       return { success: false, message: 'Failed to submit. Please try again.' };
     }
   };
