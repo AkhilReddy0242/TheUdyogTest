@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import { Building, Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,7 +16,54 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+export interface ContactForm {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  phone: string;
+}
+
+
 export default function ContactPage() {
+  const [formData, setFormData] = useState<ContactForm>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    phone: ""
+  })
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, formData: ContactForm)  => {
+    event.preventDefault(); 
+    console.log(formData)
+    try {
+      const response = await fetch('/api/sheets', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        phone: ''
+      });
+
+      return { success: true, message: 'Successfully submitted!' };
+    } catch (error) {
+      return { success: false, message: 'Failed to submit. Please try again.' };
+    }
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -43,21 +93,55 @@ export default function ContactPage() {
                 <CardTitle>Send us a Message</CardTitle>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={(e) => handleSubmit(e, formData)}>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name</Label>
-                      <Input id="name" placeholder="John Doe" />
+                      <Input 
+                        id="name" 
+                        placeholder="John Doe" 
+                        value={formData.name}
+                        onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                        required
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="john@example.com" />
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@example.com" 
+                        value={formData.email}
+                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                      />
                     </div>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input 
+                      id="phone" 
+                      placeholder="Your phone number" 
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Validate phone number to be exactly 10 digits
+                        if (/^\d{0,10}$/.test(value)) {
+                          setFormData(prev => ({ ...prev, phone: value }));
+                        }
+                      }}
+                      required
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Select>
+                    <Select 
+                      value={formData.subject}
+                      onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
+                      required
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select a subject" />
                       </SelectTrigger>
@@ -70,6 +154,8 @@ export default function ContactPage() {
                       </SelectContent>
                     </Select>
                   </div>
+                  </div>
+                  
 
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
@@ -77,6 +163,9 @@ export default function ContactPage() {
                       id="message"
                       placeholder="Your message here..."
                       className="min-h-[150px]"
+                      value={formData.message}
+                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                      required
                     />
                   </div>
 
