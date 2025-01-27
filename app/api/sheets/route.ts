@@ -1,27 +1,15 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
 
-export async function OPTIONS(request: Request) {
-  return new NextResponse(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Access-Control-Max-Age': '86400',
-    },
-  });
-}
 export async function POST(request: Request) {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  };
   try {
     const data = await request.json();
-    console.log( process.env.GOOGLE_CLIENT_EMAIL)
-    console.log(`Data from env = ${process.env.GOOGLE_PRIVATE_KEY}`)
+    
+    // Validate required environment variables
+    if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_SHEET_ID) {
+      throw new Error('Missing required environment variables');
+    }
+
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -31,7 +19,7 @@ export async function POST(request: Request) {
     });
 
     const sheets = google.sheets({ version: 'v4', auth });
-    console.log(`GOogle Sheet ID = ${ process.env.GOOGLE_SHEET_ID}`)
+
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
       range: 'Contacts!A:F',
@@ -48,15 +36,12 @@ export async function POST(request: Request) {
       }
     });
 
-    return NextResponse.json(
-      { success: true, data: response.data },
-      { headers }
-    );
+    return NextResponse.json({ success: true, data: response.data });
   } catch (error) {
     console.error('API Error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to update sheet' },
-      { status: 500, headers }
+      { status: 500 }
     );
   }
 }

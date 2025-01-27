@@ -36,7 +36,6 @@ export default function ContactPage() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, formData: ContactForm)  => {
     event.preventDefault(); 
-    console.log(formData)
     try {
       const response = await fetch('/api/sheets', {
         method: 'POST',
@@ -44,13 +43,14 @@ export default function ContactPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-        mode: 'cors',
+        mode: 'cors'
       });
 
       if (!response.ok) {
         throw new Error('Failed to submit');
       }
 
+      // Reset form
       setFormData({
         name: '',
         email: '',
@@ -61,7 +61,7 @@ export default function ContactPage() {
 
       return { success: true, message: 'Successfully submitted!' };
     } catch (error) {
-      console.log(error)
+      console.error(error);
       return { success: false, message: 'Failed to submit. Please try again.' };
     }
   };
