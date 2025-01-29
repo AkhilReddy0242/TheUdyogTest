@@ -19,9 +19,9 @@ import { VisuallyHidden } from "@/components/ui/visually-hidden"
 
 const routes = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/careers", label: "Career Opportunities" },
+  { href: "/about", label: "About Us" },
   { href: "/contact", label: "Contact" },
 ]
 

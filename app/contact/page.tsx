@@ -89,16 +89,16 @@ export default function ContactPage() {
           priority
         />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10 pl-8">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Contact Us</h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
+        <div className="container relative z-10 pl-4 sm:pl-8">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">Contact Us</h1>
+          <p className="mt-2 text-lg text-muted-foreground max-w-2xl">
             Get in touch with our team for any inquiries or partnership opportunities
           </p>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-16">
+      <section className="py-8 sm:py-16">
         <div className="container">
           <div className="grid gap-8 md:grid-cols-3">
             <Card className="md:col-span-2">
@@ -131,42 +131,42 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input 
-                      id="phone" 
-                      placeholder="Your phone number" 
-                      value={formData.phone}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        // Validate phone number to be exactly 10 digits
-                        if (/^\d{0,10}$/.test(value)) {
-                          setFormData(prev => ({ ...prev, phone: value }));
-                        }
-                      }}
-                      required
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input 
+                        id="phone" 
+                        placeholder="Your phone number" 
+                        value={formData.phone}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          // Validate phone number to be exactly 10 digits
+                          if (/^\d{0,10}$/.test(value)) {
+                            setFormData(prev => ({ ...prev, phone: value }));
+                          }
+                        }}
+                        required
+                      />
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Select 
-                      value={formData.subject}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
-                      required
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a subject" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="general">General Inquiry</SelectItem>
-                        <SelectItem value="partnership">Partnership Opportunity</SelectItem>
-                        <SelectItem value="training">Training Programs</SelectItem>
-                        <SelectItem value="placement">Placement Services</SelectItem>
-                        <SelectItem value="support">Support</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Subject</Label>
+                      <Select 
+                        value={formData.subject}
+                        onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
+                        required
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a subject" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="general">General Inquiry</SelectItem>
+                          <SelectItem value="partnership">Partnership Opportunity</SelectItem>
+                          <SelectItem value="training">Training Programs</SelectItem>
+                          <SelectItem value="placement">Placement Services</SelectItem>
+                          <SelectItem value="support">Support</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                   
 
@@ -227,7 +227,7 @@ export default function ContactPage() {
                     <div>
                       <p className="font-medium">Business Hours</p>
                       <p className="text-sm text-muted-foreground">
-                        Monday - sunday<br />
+                        Monday - Sunday<br />
                         9:00 AM - 6:00 PM
                       </p>
                     </div>
@@ -243,9 +243,6 @@ export default function ContactPage() {
                   <p className="text-muted-foreground mb-4">
                     Join our network of employers and training partners to create more opportunities.
                   </p>
-                  <Button variant="outline" className="w-full">
-                    Become a Partner
-                  </Button>
                 </CardContent>
               </Card>
             </div>

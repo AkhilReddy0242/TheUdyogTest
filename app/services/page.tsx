@@ -25,13 +25,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Training Section */}
-      <section id="training" className="py-16 pl-8 pr-6">
+      <section id="training" className="py-16 px-4 sm:px-8">
         <div className="container">
           <SectionHeader
             title="Training Programs"
             description="Enhance your skills with our expert-led training programs"
           />
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <GraduationCap className="h-8 w-8 mb-4" />
@@ -79,13 +79,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Placement Section */}
-      <section id="placement" className="py-16 bg-muted/50 pl-8 pr-6">
+      <section id="placement" className="py-16 bg-muted/50 px-4 sm:px-8">
         <div className="container">
           <SectionHeader
             title="Placement Services"
             description="End-to-end placement support for career success"
           />
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 sm:grid-cols-1">
             <div>
               <h3 className="text-xl font-semibold mb-4">For Job Seekers</h3>
               <ul className="space-y-4 text-muted-foreground">
@@ -111,13 +111,13 @@ export default function ServicesPage() {
       </section>
 
       {/* Consultancy Section */}
-      <section id="consultancy" className="py-16 pl-6 pr-6">
+      <section id="consultancy" className="py-16 px-4 sm:px-8">
         <div className="container">
           <SectionHeader
             title="Consultancy Services"
             description="Strategic workforce planning and management solutions"
           />
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>HR Strategy</CardTitle>

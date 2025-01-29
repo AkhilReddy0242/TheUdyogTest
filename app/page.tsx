@@ -20,13 +20,13 @@ export default function Home() {
           priority
         />
         <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-        <div className="container relative z-10 mx-auto px-4 pl-8">
+        <div className="container relative z-10 mx-auto px-4 sm:px-8">
           <div className="max-w-3xl">
             <SlideIn direction="up">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                 Work is Worship.
                 <br />
-                Build Your Future with The Udyog.
+                Build Your Future with <i>The Udyog.</i>
               </h1>
             </SlideIn>
             <FadeIn delay={0.2}>
@@ -35,7 +35,7 @@ export default function Home() {
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
-              <div className="mt-10 flex gap-4">
+              <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild>
                   <Link href="/careers">
                     Explore Jobs <ArrowRight className="ml-2 h-4 w-4" />
@@ -51,15 +51,15 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-muted/50">
+      <section className="py-16 bg-muted/50 p-6">
         <div className="container">
           <StaggerChildren>
-            <div className="grid gap-8 sm:grid-cols-3">
+            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
               <StaggerItem>
                 <Card>
                   <CardHeader className="flex flex-row items-center space-y-0">
                     <Users className="h-6 w-6 mr-4" />
-                    <CardTitle>1000+</CardTitle>
+                    <CardTitle>100+</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">Successful Placements</p>
@@ -70,7 +70,7 @@ export default function Home() {
                 <Card>
                   <CardHeader className="flex flex-row items-center space-y-0">
                     <Building className="h-6 w-6 mr-4" />
-                    <CardTitle>200+</CardTitle>
+                    <CardTitle>50+</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground">Partner Companies</p>
@@ -94,7 +94,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16">
+      <section className="py-16 p-6">
         <div className="container">
           <FadeIn>
             <div className="text-center mb-12">
@@ -105,13 +105,13 @@ export default function Home() {
             </div>
           </FadeIn>
           <StaggerChildren delay={0.2}>
-            <div className="grid gap-8 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2">
               <StaggerItem>
-                <Card>
+                <Card className="flex flex-col h-full">
                   <CardHeader>
                     <CardTitle>Training</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow">
                     <p className="text-muted-foreground">
                       Expert-led training programs in IT and non-IT fields, including advanced technologies like AI, ML, and blockchain.
                     </p>
@@ -122,11 +122,11 @@ export default function Home() {
                 </Card>
               </StaggerItem>
               <StaggerItem>
-                <Card>
+                <Card className="flex flex-col h-full">
                   <CardHeader>
                     <CardTitle>Placement</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow">
                     <p className="text-muted-foreground">
                       End-to-end placement support including profiling, matching, and successful onboarding with top companies.
                     </p>
@@ -137,11 +137,11 @@ export default function Home() {
                 </Card>
               </StaggerItem>
               <StaggerItem>
-                <Card>
+                <Card className="flex flex-col h-full">
                   <CardHeader>
                     <CardTitle>Consultancy</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow">
                     <p className="text-muted-foreground">
                       Strategic workforce planning and recruitment solutions for businesses of all sizes.
                     </p>

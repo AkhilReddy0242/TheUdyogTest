@@ -85,21 +85,22 @@ export default function CareersPage() {
       />
 
       {/* Search Section */}
-      <section className="py-16 pl-8 pr-8">
+      <section className="py-16 px-4 md:pl-8 md:pr-8">
         <div className="container">
           <div className="space-y-4">
             <div className="relative">
               <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
               <Input
                 placeholder="Search jobs by title, company, or keywords..."
-                className="pl-10"
+                className="pl-10 w-full"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
+            {/* Adjusted the select containers for responsiveness */}
             {/* <div className="flex flex-col md:flex-row gap-4">
-              <Select value={location} onValueChange={setLocation}>
-                <SelectTrigger className="w-full md:w-[200px]">
+              <Select value={location} onValueChange={setLocation} className="w-full md:w-[200px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Location" />
                 </SelectTrigger>
                 <SelectContent>
@@ -111,8 +112,8 @@ export default function CareersPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={jobType} onValueChange={setJobType}>
-                <SelectTrigger className="w-full md:w-[200px]">
+              <Select value={jobType} onValueChange={setJobType} className="w-full md:w-[200px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Job Type" />
                 </SelectTrigger>
                 <SelectContent>
@@ -124,8 +125,8 @@ export default function CareersPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={experience} onValueChange={setExperience}>
-                <SelectTrigger className="w-full md:w-[200px]">
+              <Select value={experience} onValueChange={setExperience} className="w-full md:w-[200px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Experience Level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -139,7 +140,7 @@ export default function CareersPage() {
           </div>
 
           <StaggerChildren className="mt-8">
-            <div className="grid gap-6">
+            <div className="grid gap-6 grid-cols-1 ">
               {filteredJobs.length === 0 ? (
                 <Card>
                   <CardContent className="py-8">
