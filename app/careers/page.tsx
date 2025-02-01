@@ -6,13 +6,13 @@ import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { ParallaxHeader } from "@/components/parallax-header"
 import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
 import jobsData from "../data/jobs.json"
@@ -56,8 +56,8 @@ export default function CareersPage() {
         job.Company_Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Skills_Required.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Job_Description.toLowerCase().includes(searchTerm.toLowerCase())
-      
-      const matchesLocation = !location || job.Location.toLowerCase().includes(location.toLowerCase())
+      // setLocation(location === 'All Locations' ? '' : location)
+      const matchesLocation = location === 'all'|| job.Location.toLowerCase().includes(location.toLowerCase())
       // const matchesType = !jobType || job.type === jobType
       // const matchesExperience = !experience || job.experience.includes(experience)
 
@@ -76,7 +76,7 @@ export default function CareersPage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       <ParallaxHeader
         title="Career Opportunities"
         description="Find your next career move with The Udyog"
@@ -98,13 +98,13 @@ export default function CareersPage() {
               />
             </div>
             {/* Adjusted the select containers for responsiveness */}
-            {/* <div className="flex flex-col md:flex-row gap-4">
-              <Select value={location} onValueChange={setLocation} className="w-full md:w-[200px]">
+            <div className="flex flex-col md:flex-row gap-4">
+              <Select value={location} onValueChange={setLocation}>
                 <SelectTrigger>
                   <SelectValue placeholder="Location" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="location">All Locations</SelectItem>
+                  <SelectItem value="all">All Locations</SelectItem>
                   <SelectItem value="mumbai">Mumbai</SelectItem>
                   <SelectItem value="delhi">Delhi</SelectItem>
                   <SelectItem value="bangalore">Bangalore</SelectItem>
@@ -112,7 +112,7 @@ export default function CareersPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={jobType} onValueChange={setJobType} className="w-full md:w-[200px]">
+              {/* <Select value={jobType} onValueChange={setJobType} className="w-full md:w-[200px]">
                 <SelectTrigger>
                   <SelectValue placeholder="Job Type" />
                 </SelectTrigger>
@@ -135,12 +135,13 @@ export default function CareersPage() {
                   <SelectItem value="2-5">2-5 years</SelectItem>
                   <SelectItem value="5+">5+ years</SelectItem>
                 </SelectContent>
-              </Select>
-            </div> */}
+              </Select> */}
+            </div>
           </div>
 
           <StaggerChildren className="mt-8">
             <div className="grid gap-6 grid-cols-1 ">
+              <label> Avaliable Jobs : {filteredJobs.length}</label>
               {filteredJobs.length === 0 ? (
                 <Card>
                   <CardContent className="py-8">
@@ -150,6 +151,7 @@ export default function CareersPage() {
                   </CardContent>
                 </Card>
               ) : (
+                
                 filteredJobs.map((job) => (
                   <StaggerItem key={job.Job_ID}>
                     <Card>
