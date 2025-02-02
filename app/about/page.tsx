@@ -1,13 +1,36 @@
 "use client"
 
 import Image from "next/image"
-import { Heart, Lightbulb, Target, Users } from "lucide-react"
+import { Heart, Lightbulb, Target, Users,Facebook, Twitter, Instagram } from "lucide-react"
 import { SectionHeader } from "@/components/section-header"
 import { ValueCard } from "@/components/value-card"
 import { ParallaxHeader } from "@/components/parallax-header"
 import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
+import Link from "next/link"
 
 export default function AboutPage() {
+  const teamMembers = [
+    {
+      name: "Anreddy Karthik Reddy",
+      role: "UI Designer",
+      image: "/profile pic.png"
+    },
+    {
+      name: "Anreddy Akhil Reddy",
+      role: "Product Designer",
+      image: "/b.png"
+    },
+    {
+      name: "Padma Devaraj",
+      role: "App Developer",
+      image: "/e.png"
+    },
+    {
+      name: "Rohith Reddy",
+      role: "Content Writer",
+      image: "/profile pic.png"
+    }
+  ]
   return (
     <div className="min-h-screen">
       <ParallaxHeader
@@ -143,6 +166,83 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Team Section */}
+      <section className="container mx-auto px-4 py-16">
+      <div className="text-center mb-12">
+        <div className="text-primary mb-2">Our Team</div>
+        <h2 className="text-4xl font-bold mb-4">Meet Our Team</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {teamMembers.map((member, index) => (
+          <div 
+            key={index} 
+            className="group relative rounded-lg p-6 text-center overflow-hidden
+                       hover:transform hover:scale-[1.005] hover:-translate-y-1
+                       transition-all duration-300 ease-out h-[321px] w-full
+                       hover:shadow-[0_24px_36px_rgba(0,0,0,0.11),0_24px_46px_rgba(206,178,252,0.48)]"
+          >
+            <div className="relative w-[131px] h-[131px] mx-auto mb-4">
+              {/* Animated overlay - positioned relative to the wrapper */}
+              <div className="absolute w-[118px] h-[118px] bg-gray-500 rounded-full 
+                            left-[6.5px] top-[6.5px] -z-10
+                            transition-transform duration-300 ease-out origin-center
+                            group-hover:scale-[5]" />
+
+              {/* Profile image wrapper */}
+              <div className="absolute inset-0
+                            rounded-full border-2 border-gray-500
+                            transition-all duration-300 ease-out
+                            group-hover:border-white group-hover:bg-white">
+                <div className="absolute left-[6.5px] top-[6.5px]
+                              w-[118px] h-[118px] rounded-full overflow-hidden
+                              after:content-[''] after:absolute after:inset-0 
+                              after:bg-white after:opacity-0 after:z-20
+                              group-hover:after:opacity-30 after:transition-opacity">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="rounded-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h3 className="text-xl font-semibold mb-2 relative z-10
+                         transition-colors duration-300 group-hover:text-white">
+              {member.name}
+            </h3>
+            <p className="text-gray-600 mb-4 relative z-10
+                       transition-colors duration-300 group-hover:text-white">
+              {member.role}
+            </p>
+            
+            <div className="flex justify-center gap-4 relative z-10">
+              <Link href="#" className="text-gray-400 transition-colors
+                                      group-hover:text-white/80 hover:text-primary
+                                      group-hover:hover:text-white">
+                <Facebook className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-gray-400 transition-colors
+                                      group-hover:text-white/80 hover:text-primary
+                                      group-hover:hover:text-white">
+                <Twitter className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="text-gray-400 transition-colors
+                                      group-hover:text-white/80 hover:text-primary
+                                      group-hover:hover:text-white">
+                <Instagram className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
     </div>
   )
 }

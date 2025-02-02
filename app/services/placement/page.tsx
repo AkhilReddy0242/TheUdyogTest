@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Users, Briefcase, TrendingUp, FileQuestion, BookOpen, Mail, Video, Sun, Moon, FileCheck, GraduationCap, Handshake, MessageCircle, Send, MessageSquare, Code, Laptop2Icon } from 'lucide-react'
 import { useRouter } from "next/navigation"
+import { Testimonials } from '@/components/testimonials'
 
 
 const placementProcess = [
@@ -282,7 +283,7 @@ export default function PlacementContent() {
       </section>
 
       {/* Success Stories */}
-      <section className="py-16 md:py-24">
+      {/* <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h3 className="text-3xl md:text-4xl font-bold mb-12 text-center">Success Stories</h3>
           <div className="flex justify-between mb-4">
@@ -324,7 +325,8 @@ export default function PlacementContent() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
+      <Testimonials/>
 
       {/* Call to Action */}
       <section className="py-16 md:py-24">

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { FadeIn } from "@/components/animations/fade-in"
 import { SlideIn } from "@/components/animations/slide-in"
 import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
+import { Testimonials } from "@/components/testimonials"
 
 export default function Home() {
   return (
@@ -155,6 +156,8 @@ export default function Home() {
           </StaggerChildren>
         </div>
       </section>
+
+      <Testimonials/>
     </>
   )
 }
