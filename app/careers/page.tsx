@@ -15,20 +15,8 @@ import {
 } from "@/components/ui/select"
 import { ParallaxHeader } from "@/components/parallax-header"
 import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
-import jobsData from "../data/jobs.json"
 import testJobsData from "../data/testjob.json"
 
-interface Job {
-  id: string
-  title: string
-  company: string
-  location: string
-  type: string
-  experience: string
-  salary: string
-  skills: string[]
-  description: string
-}
 
 interface JobsForSearch {
   Job_ID: string,
@@ -49,13 +37,14 @@ export default function CareersPage() {
   const [experience, setExperience] = useState("")
   const [filteredJobs, setFilteredJobs] = useState<JobsForSearch[]>(testJobsData.jobs)
   const [expandedJobs, setExpandedJobs] = useState<{ [key: string]: boolean }>({})
+  const [currentPage, setCurrentPage] = useState(1);
+  const jobsPerPage = 50;
 
   useEffect(() => {
     const filtered = testJobsData.jobs.filter(job => {
       const matchesSearch = job.Job_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.Company_Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.Skills_Required.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.Job_Description.toLowerCase().includes(searchTerm.toLowerCase())
+        job.Skills_Required.toLowerCase().includes(searchTerm.toLowerCase()) 
       // setLocation(location === 'All Locations' ? '' : location)
       const matchesLocation = location === 'all'|| job.Location.toLowerCase().includes(location.toLowerCase())
       // const matchesType = !jobType || job.type === jobType
@@ -66,7 +55,23 @@ export default function CareersPage() {
     })
 
     setFilteredJobs(filtered)
+    setCurrentPage(1); // Reset to first page on filter change
   }, [searchTerm, location, jobType, experience])
+
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
+  const currentJobs = filteredJobs.slice((currentPage - 1) * jobsPerPage, currentPage * jobsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
 
   const toggleDescription = (jobId: string) => {
     setExpandedJobs(prev => ({
@@ -141,8 +146,8 @@ export default function CareersPage() {
 
           <StaggerChildren className="mt-8">
             <div className="grid gap-6 grid-cols-1 ">
-              <label> Avaliable Jobs : {filteredJobs.length}</label>
-              {filteredJobs.length === 0 ? (
+              <label> Available Jobs: {filteredJobs.length}</label>
+              {currentJobs.length === 0 ? (
                 <Card>
                   <CardContent className="py-8">
                     <p className="text-center text-muted-foreground">
@@ -151,8 +156,7 @@ export default function CareersPage() {
                   </CardContent>
                 </Card>
               ) : (
-                
-                filteredJobs.map((job) => (
+                currentJobs.map((job) => (
                   <StaggerItem key={job.Job_ID}>
                     <Card>
                       <CardHeader>
@@ -201,6 +205,12 @@ export default function CareersPage() {
               )}
             </div>
           </StaggerChildren>
+
+          {/* Pagination Controls */}
+          <div className="flex justify-between mt-4">
+            <Button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</Button>
+            <Button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</Button>
+          </div>
         </div>
       </section>
     </div>

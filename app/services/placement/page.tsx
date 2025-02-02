@@ -157,7 +157,7 @@ export default function PlacementContent() {
             <p className="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300">
               Unlock your potential with our expert placement services. We connect talent with opportunity.
             </p>
-            <Button size="lg" className="hover:bg-zinc-700">
+            <Button size="lg" className="hover:bg-zinc-700"  onClick={() => router.push("/contact")}>
               Get Started
             </Button>
           </motion.div>
@@ -339,7 +339,7 @@ export default function PlacementContent() {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Let us help you find the perfect job opportunity and guide you towards a successful career.
             </p>
-            <Button size="lg" className="bg-zinc-800 hover:bg-zinc-700"  onClick={() => router.push("/contact")}>
+            <Button size="lg" className="hover:bg-zinc-700"  onClick={() => router.push("/contact")}>
               Contact Us Today
             </Button>
           </motion.div>
