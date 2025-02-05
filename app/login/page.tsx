@@ -73,10 +73,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container max-w-md py-16">
+    <div className="container mx-auto px-4 py-16 max-w-lg">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold">Welcome Back</h1>
-        <p className="text-muted-foreground mt-2">
+        <h1 className="text-4xl font-extrabold text-gray-900">Welcome Back</h1>
+        <p className="text-gray-600 mt-2">
           Log in to access your account
         </p>
       </div>
@@ -88,9 +88,14 @@ export default function LoginPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-lg font-medium">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com" type="email" {...field} />
+                  <Input
+                    placeholder="john@example.com"
+                    type="email"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -102,16 +107,25 @@ export default function LoginPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-lg font-medium">Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="••••••••" type="password" {...field} />
+                  <Input
+                    placeholder="••••••••"
+                    type="password"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full py-3 font-semibold rounded-md transition duration-300"
+            disabled={isLoading}
+          >
             {isLoading ? 'Logging in...' : 'Log In'}
           </Button>
         </form>

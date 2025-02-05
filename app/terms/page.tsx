@@ -83,7 +83,7 @@ export default function TermsPage() {
                     <AccordionTrigger>5. Disclaimer of Warranties</AccordionTrigger>
                     <AccordionContent>
                       <p className="mb-4">
-                        The Udyog provides its services "as is" and makes no warranties regarding:
+                        The Udyog provides its services &quot;as is&quot; and makes no warranties regarding:
                       </p>
                       <ul className="list-disc pl-6 mb-4 space-y-2">
                         <li>Accuracy of third-party job listings</li>

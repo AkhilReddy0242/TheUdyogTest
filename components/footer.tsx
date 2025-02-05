@@ -1,6 +1,7 @@
 import Link from "next/link"
 // import { Building2 } from "lucide-react"
 import logo from './LOGO.png'
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -10,7 +11,7 @@ export function Footer() {
           <div className="flex flex-col space-y-4">
             <Link href="/" className="flex items-center space-x-2">
               {/* <Building2 className="h-6 w-6" /> */}
-              <img src={logo.src} alt="UDYOG LOGO" className="h-8 w-8" />
+              <Image src={logo.src} alt="UDYOG LOGO" className="h-8 w-8" width={10} height={10} />
               <span className="font-bold">The Udyog</span>
             </Link>
             <p className="text-sm text-muted-foreground">
@@ -51,7 +52,7 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold">Services</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/services#training" className="text-muted-foreground hover:text-foreground">
+                <Link href="/services/training" className="text-muted-foreground hover:text-foreground">
                   Training
                 </Link>
               </li>

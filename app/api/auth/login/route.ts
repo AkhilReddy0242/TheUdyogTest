@@ -42,7 +42,7 @@ export async function POST(req: Request) {
     }
 
     const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.role },
+      { userId: user._id, email: user.email, role: user.role, isPremium: user.isPremium},
       JWT_SECRET,
       { expiresIn: '24h' }
     );
@@ -54,6 +54,9 @@ export async function POST(req: Request) {
         email: user.email,
         name: user.name,
         role: user.role,
+        resumeUrl: user.resumeUrl,
+        mobile: user.mobile,
+        isPremium: user.isPremium,
       },
     });
   } catch (error) {

@@ -38,7 +38,7 @@ export default function ContactPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, formData: ContactForm)  => {
     event.preventDefault(); 
     try {
-      const response = await fetch('/api/sheets', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

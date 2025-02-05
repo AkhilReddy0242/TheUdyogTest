@@ -6,6 +6,8 @@ export interface IUser extends mongoose.Document {
   password: string;
   name: string;
   role: 'jobseeker' | 'employer' | 'admin';
+  mobile?: string;
+  resumeUrl?: string;
   isPremium: boolean;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
@@ -29,6 +31,14 @@ const userSchema = new mongoose.Schema<IUser>({
     type: String,
     enum: ['jobseeker', 'employer', 'admin'],
     default: 'jobseeker',
+  },
+  mobile: {
+    type: String,
+    required: false,
+  },
+  resumeUrl: {
+    type: String,
+    required: false,
   },
   isPremium: {
     type: Boolean,

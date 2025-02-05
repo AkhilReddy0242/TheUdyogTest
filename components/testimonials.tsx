@@ -86,7 +86,7 @@ export function Testimonials() {
         <div className="mb-12">
           <h2 className=" mb-4">Clients Testimonials</h2>
           <h1 className="text-4xl font-bold mb-6">What A Job Holder Says About Us</h1>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="max-w-3xl mx-auto">
             There are many variations of passages of available, but the majority have suffered some form, by injected humour,
             or look even slightly believable.
           </p>
@@ -126,7 +126,7 @@ export function Testimonials() {
                     </div>
                     <div className="relative">
                       <span className=" text-5xl absolute -top-4 left-0 opacity-20">&quot;</span>
-                      <p className="text-gray-600 relative z-10">{testimonial.text}</p>
+                      <p className="relative z-10">{testimonial.text}</p>
                     </div>
                   </div>
                 </div>

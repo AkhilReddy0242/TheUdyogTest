@@ -117,7 +117,7 @@ export default function Home() {
                       Expert-led training programs in IT and non-IT fields, including advanced technologies like AI, ML, and blockchain.
                     </p>
                     <Button variant="link" asChild className="mt-4 p-0">
-                      <Link href="/services#training">Learn more →</Link>
+                      <Link href="/services/training">Learn more →</Link>
                     </Button>
                   </CardContent>
                 </Card>

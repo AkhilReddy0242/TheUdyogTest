@@ -52,7 +52,10 @@ export default function ProfilePage() {
       setAuth({
         id: user.id,
         role: user.role,
-        ...values
+        isPremium: user.isPremium,
+        mobile: user.mobile,
+        resumeUrl: user.resumeUrl,
+        ...values,
       }, token ?? '')
       
       toast({
