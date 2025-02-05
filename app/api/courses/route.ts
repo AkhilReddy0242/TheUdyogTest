@@ -7,7 +7,7 @@ import { join } from "path"
 import { mkdir } from "fs/promises"
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key"
-const UPLOADS_DIR = join(process.cwd(), "public", "uploads")
+const UPLOADS_DIR = "/tmp/uploads"
 
 async function ensureUploadsDirectory() {
   try {
