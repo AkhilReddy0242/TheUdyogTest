@@ -6,7 +6,7 @@ import { join } from 'path';
 import { mkdir } from 'fs/promises';
 
 // Ensure uploads directory exists
-const UPLOADS_DIR = join(process.cwd(), 'public', 'uploads');
+const UPLOADS_DIR = "/tmp/uploads"
 
 async function ensureUploadsDirectory() {
   try {
