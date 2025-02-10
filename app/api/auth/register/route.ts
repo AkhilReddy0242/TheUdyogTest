@@ -57,10 +57,10 @@ export async function POST(req: Request) {
 
       // Write file
       const buffer = Buffer.from(await resume.arrayBuffer());
-      await writeFile(filePath, buffer);
+      await writeFile(filePath, new Uint8Array(buffer));
 
       // Store the public URL
-      resumeUrl = `/uploads/${fileName}`;
+      resumeUrl = `/tmp/uploads/${fileName}`;
     }
 
     // Create user

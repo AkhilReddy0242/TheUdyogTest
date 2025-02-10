@@ -1,21 +1,10 @@
 import { NextResponse } from "next/server"
 import { connectDB } from "@/lib/db"
 import { Course } from "@/lib/models/course"
+import { uploadToDrive } from "@/lib/google-drive"
 import jwt from "jsonwebtoken"
-import { writeFile } from "fs/promises"
-import { join } from "path"
-import { mkdir } from "fs/promises"
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key"
-const UPLOADS_DIR = "/tmp/uploads"
-
-async function ensureUploadsDirectory() {
-  try {
-    await mkdir(UPLOADS_DIR, { recursive: true })
-  } catch (error) {
-    console.error("Error creating uploads directory:", error)
-  }
-}
 
 export async function GET() {
   try {
@@ -53,7 +42,6 @@ export async function POST(req: Request) {
     }
 
     await connectDB()
-    await ensureUploadsDirectory()
 
     const formData = await req.formData()
     const title = formData.get("title") as string
@@ -62,6 +50,7 @@ export async function POST(req: Request) {
     const image = formData.get("image") as File
     const resources = formData.getAll("resources") as File[]
 
+    // Validate required fields
     if (!title || !description || !topics || !image) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -69,33 +58,33 @@ export async function POST(req: Request) {
       )
     }
 
-    // Handle image upload
-    const imageExt = image.name.split(".").pop()
-    const imageFileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${imageExt}`
-    const imagePath = join(UPLOADS_DIR, imageFileName)
-    await writeFile(imagePath, new Uint8Array(await image.arrayBuffer()))
-    const imageUrl = `/uploads/${imageFileName}`
+    // Upload image to Google Drive
+    const imageBuffer = Buffer.from(await image.arrayBuffer())
+    const imageUpload = await uploadToDrive(
+      imageBuffer,
+      image.name,
+      image.type
+    )
 
-    // Handle resource uploads
+    // Upload resources to Google Drive
     const uploadedResources = await Promise.all(
       resources.map(async (file) => {
-        const ext = file.name.split(".").pop()
-        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${ext}`
-        const filePath = join(UPLOADS_DIR, fileName)
-        await writeFile(filePath, new Uint8Array(await image.arrayBuffer()))
+        const buffer = Buffer.from(await file.arrayBuffer())
+        const upload = await uploadToDrive(buffer, file.name, file.type)
         return {
           name: file.name,
-          url: `/uploads/${fileName}`,
+          url: upload.webViewLink,
           type: file.name.endsWith(".pdf") ? "pdf" : "other"
         }
       })
     )
 
+    // Create course in the database
     const course = await Course.create({
       title,
       description,
       topics,
-      imageUrl,
+      imageUrl: imageUpload.webViewLink,
       resources: uploadedResources
     })
 
