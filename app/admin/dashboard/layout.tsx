@@ -41,7 +41,7 @@ export default function AdminDashboardLayout({
   return (
     <div>
       <header className="border-b">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-16 items-center justify-between p-8">
           <h2 className="text-lg font-semibold">Admin Dashboard</h2>
           <Link
                 key='/admin/dashboard/courses'

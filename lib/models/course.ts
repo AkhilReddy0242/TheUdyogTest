@@ -1,39 +1,13 @@
-import mongoose from "mongoose"
+import mongoose from 'mongoose';
 
-const courseSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const CourseSchema = new mongoose.Schema({
+  title: String,
+  duration: String,
+  syllabusLink: String,
+  categoryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  topics: [{
-    type: String,
-    required: true,
-  }],
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  resources: [{
-    name: {
-      type: String,
-      required: true,
-    },
-    url: {
-      type: String,
-      required: true,
-    },
-    type: {
-      type: String,
-      enum: ["pdf", "other"],
-      required: true,
-    },
-  }],
-}, {
-  timestamps: true,
-})
+});
 
-export const Course = mongoose.models.Course || mongoose.model("Course", courseSchema)
+export default mongoose.models.Course || mongoose.model('Course', CourseSchema);
