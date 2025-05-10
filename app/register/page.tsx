@@ -27,27 +27,28 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const ACCEPTED_FILE_TYPES = ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+const ACCEPTED_FILE_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
 
 const registerSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  mobile: z.string().min(10, 'Mobile number must be at least 10 digits').optional(),
-  role: z.enum(['jobseeker', 'employer'], {
-    required_error: 'Please select a role',
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  mobile: z.string().min(10, "Mobile number must be at least 10 digits").optional(),
+  role: z.enum(["jobseeker", "employer"], {
+    required_error: "Please select a role",
   }),
   resume: z
-    .instanceof(FileList)
-    .refine((files) => files?.length === 1, "Resume is required")
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      "Max file size is 5MB"
-    )
-    .refine(
-      (files) => ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
-      "Only .pdf, .doc, and .docx formats are supported"
-    )
+    .any()
+    .refine((file) => {
+      if (file instanceof File) {
+        return file.size <= MAX_FILE_SIZE && ACCEPTED_FILE_TYPES.includes(file.type);
+      }
+      return false;
+    }, "Resume is required and must be a valid file type with a size less than 5MB")
     .optional()
     .or(z.literal(undefined)),
 });
